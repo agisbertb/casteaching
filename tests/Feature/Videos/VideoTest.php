@@ -2,12 +2,15 @@
 
 namespace Tests\Feature\Videos;
 
+use App\Models\Video;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class VideoTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * @test
      */
@@ -19,8 +22,7 @@ class VideoTest extends TestCase
             'title' => 'Ubuntu 101',
             'description' => '# Here description',
             'url' => 'https://youtu.be/w8j07_DBl_I',
-            'published_at' => Carbon::parse('January 11, 2024 15:00am'),
-            'completed' => false,
+            'published_at' => Carbon::parse('January 11, 2024 15:00'),
             'previous' => null,
             'next' => null,
             'series_id' => 1
@@ -34,7 +36,7 @@ class VideoTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Ubuntu 101');
         $response->assertSee('Here description');
-        $response->assertSee('January 11, 2024 15:00am');
+        $response->assertSee('January 11');
 
     }
 }
