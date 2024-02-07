@@ -8,6 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+/**
+ * @covers \App\Http\Controllers\VideosController
+ */
 class VideoTest extends TestCase
 {
     use RefreshDatabase;
@@ -16,8 +19,6 @@ class VideoTest extends TestCase
      */
     public function users_can_view_videos(): void
     {
-        // FASE 1 -> Preparació -> Prepare
-        // WISHFUL PROGRAMMING -> API
         $video = Video::create([
             'title' => 'Ubuntu 101',
             'description' => '# Here description',
@@ -28,15 +29,22 @@ class VideoTest extends TestCase
             'series_id' => 1
         ]);
 
-        // FASE 2 -> Execució -> Executa el codi a provar
-        // Laravel HTTP TESTS ->
         $response = $this->get('/videos/' . $video->id);
 
-        // FASE 3 -> Assertions -> comprovacions
         $response->assertStatus(200);
         $response->assertSee('Ubuntu 101');
         $response->assertSee('Here description');
         $response->assertSee('January 11');
 
     }
+
+    /**
+     * @test
+     */
+    public function users_cannot_view_not_existing_videos(): void
+    {
+        $response = $this->get('/videos/999');
+        $response->assertStatus(404);
+    }
+
 }

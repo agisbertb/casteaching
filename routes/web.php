@@ -21,20 +21,6 @@ Route::get('/', function () {
 
 Route::get('/videos/{id}', [VideosController::class,'show']);
 
-//Route::get('/videos/1', function () {
-//    //return 'Ubuntu 101 | Here description | January 11, 2024 15:00';
-//    $video = Video::find(1);
-//    //$video = new stdClass();
-//    //$video->title = 'Ubuntu 101';
-//    //$video->description = 'Here description';
-//    //$video->published_at = 'January 11';
-//
-//    return view('videos.show', [
-//        'video' => $video
-//
-//    ]);
-//});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
