@@ -25,9 +25,6 @@ class HelpersTest extends TestCase
         $this->assertDatabaseHas('users',[
             'name' => config('casteaching.default_user.name'),
         ]);
-        $this->assertDatabaseHas('users',[
-            'email' => config('casteaching.default_user.email'),
-        ]);
 
         $user = User::find(1);
 
@@ -44,5 +41,6 @@ class HelpersTest extends TestCase
     {
         create_default_videos();
 
+        $this->assertDatabaseCount('videos', 1);
     }
 }

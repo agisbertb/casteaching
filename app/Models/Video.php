@@ -11,19 +11,25 @@ class Video extends Model
     use HasFactory;
 
     protected $guarded = [];
-    //protected $fillable = ['title','description'];
-
     protected $dates = ['published_at'];
 
-//    protected $casts = [
-//        'published_at' => 'datetime:Y-m-d',
-//    ];
-
+    // formatted_published_at accessor
     public function getFormattedPublishedAtAttribute()
     {
- //       Carbon::setLocale('ca');
-        dd($this->published_at->format('j F'));
-    return '11 de gener de 2024';
+        if(!$this->published_at) return '';
+        $locale_date = Carbon::parse($this->published_at)->locale(config('app.locale'));
+        return $locale_date->day . ' de ' . $locale_date->monthName . ' de ' . $locale_date->year;
+
+    }
+
+    public function getFormattedForHumansPublishedAtAttribute()
+    {
+        return optional($this->published_at)->diffForHumans(Carbon::now());
+    }
+
+    public function getPublishedAtTimestampAttribute()
+    {
+        return optional($this->published_at)->timestamp;
     }
 
 }

@@ -16,7 +16,7 @@
                 <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
                     <div class="overflow-hidden rounded-lg bg-white px-4 py-2 shadow">
                         <dt class="truncate text-sm font-medium text-gray-500">Data de publicació</dt>
-                        <dd class="mt-1 text-1xl font-semibold tracking-tight text-gray-900">{{ $video->published_at }}</dd>
+                        <dd class="mt-1 text-1xl font-semibold tracking-tight text-gray-900">{{ $video->formatted_published_at }}</dd>
                     </div>
                 </dl>
 
