@@ -18,6 +18,11 @@
                     <x-nav-link href="/videos/1">
                         {{ __('Videos 1') }}
                     </x-nav-link>
+                    @can('videos_manage_index')
+                        <x-nav-link href="/manage/videos" :active="request()->routeIs('manage.videos')">
+                            {{ __('Manage Videos') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -164,9 +169,14 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="/videos/1">
+            <x-nav-link href="/videos/1">
                 {{ __('Videos 1') }}
-            </x-responsive-nav-link>
+            </x-nav-link>
+            @can('videos_manage_index')
+            <x-nav-link href="/manage/videos" :active="request()->routeIs('manage.videos')">
+                {{ __('Manage Videos') }}
+            </x-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
