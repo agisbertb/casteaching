@@ -128,3 +128,28 @@ if (! function_exists('create_permissions')) {
         Permission::firstOrCreate(['name' => 'videos_manage_index']);
     }
 }
+
+if (! function_exists('create_sample_videos')) {
+function create_sample_videos()
+{
+    $video1 = Video::create([
+        'title' => 'Ubuntu 101',
+        'description' => 'Bla bla bla',
+        'url' => 'https://youtu.be/w8j07_DBl_I',
+    ]);
+
+    $video2 = Video::create([
+        'title' => 'Ubuntu 102',
+        'description' => 'Bla bla bla',
+        'url' => 'https://youtu.be/w8j07_DBl_I',
+    ]);
+
+    $video3 = Video::create([
+        'title' => 'Ubuntu 103',
+        'description' => 'Bla bla bla',
+        'url' => 'https://youtu.be/w8j07_DBl_I',
+    ]);
+
+    return [$video1, $video2, $video3];
+}
+}
