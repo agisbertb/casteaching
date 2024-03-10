@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 
-if (! function_exists('create_default_user')) {
+
+if (!function_exists('create_default_user')) {
     function create_default_user()
     {
         $user = User::create([
-            'name' => config('casteaching.default_user.name','Andreu Gisbert Bel'),
-            'email' => config('casteaching.default_user.email','agisbert@iesebre.com'),
-            'password' => Hash::make(config('casteaching.default_user.password','12345678'))
+            'name' => config('casteaching.default_user.name', 'Andreu Gisbert Bel'),
+            'email' => config('casteaching.default_user.email', 'agisbert@iesebre.com'),
+            'password' => Hash::make(config('casteaching.default_user.password', '12345678'))
         ]);
 
         $user->super_admin = true;
@@ -24,7 +25,7 @@ if (! function_exists('create_default_user')) {
     }
 }
 
-if (! function_exists('create_default_videos')) {
+if (!function_exists('create_default_videos')) {
     function create_default_videos()
     {
         Video::create([
@@ -38,7 +39,7 @@ if (! function_exists('create_default_videos')) {
         ]);
     }
 }
-if (! function_exists('create_regular_user')) {
+if (!function_exists('create_regular_user')) {
     function create_regular_user()
     {
         $user = User::create([
@@ -59,22 +60,21 @@ if (! function_exists('create_regular_user')) {
  * @return void
  */
 
-if (! function_exists('add_personal_team')) {
-function add_personal_team($user): void
-{
-    try {
-        Team::forceCreate([
-            'name' => $user->name . "'s Team",
-            'user_id' => $user->id,
-            'personal_team' => true
-        ]);
-    } catch (\Exception $exception) {
-
+if (!function_exists('add_personal_team')) {
+    function add_personal_team($user): void
+    {
+        try {
+            Team::forceCreate([
+                'name' => $user->name . "'s Team",
+                'user_id' => $user->id,
+                'personal_team' => true
+            ]);
+        } catch (\Exception $exception) {
+        }
     }
 }
-}
 
-if (! function_exists('create_video_manager_user')) {
+if (!function_exists('create_video_manager_user')) {
     function create_video_manager_user()
     {
 
@@ -93,8 +93,25 @@ if (! function_exists('create_video_manager_user')) {
     }
 }
 
+if (!function_exists('create_user_manager_user')) {
+    function create_user_manager_user()
+    {
+        $user = User::create([
+            'name' => 'UsersManager',
+            'email' => 'usersmanager@casteaching.com',
+            'password' => Hash::make('12345678')
+        ]);
 
-if (! function_exists('create_superadmin_user')) {
+        Permission::create(['name' => 'users_manage_index']);
+        $user->givePermissionTo('users_manage_index');
+
+        add_personal_team($user);
+        return $user;
+    }
+}
+
+
+if (!function_exists('create_superadmin_user')) {
     function create_superadmin_user()
     {
         $user = User::create([
@@ -112,8 +129,9 @@ if (! function_exists('create_superadmin_user')) {
     }
 }
 
-if (! function_exists('define_gates')) {
-    function define_gates(){
+if (!function_exists('define_gates')) {
+    function define_gates()
+    {
 
         Gate::before(function (User $user, $ability) {
             if ($user->isSuperAdmin()) {
@@ -123,33 +141,57 @@ if (! function_exists('define_gates')) {
     }
 }
 
-if (! function_exists('create_permissions')) {
-    function create_permissions(){
+if (!function_exists('create_permissions')) {
+    function create_permissions()
+    {
         Permission::firstOrCreate(['name' => 'videos_manage_index']);
     }
 }
 
-if (! function_exists('create_sample_videos')) {
-function create_sample_videos()
-{
-    $video1 = Video::create([
-        'title' => 'Ubuntu 101',
-        'description' => 'Bla bla bla',
-        'url' => 'https://youtu.be/w8j07_DBl_I',
-    ]);
+if (!function_exists('create_sample_videos')) {
+    function create_sample_videos()
+    {
+        $video1 = Video::create([
+            'title' => 'Ubuntu 101',
+            'description' => 'Bla bla bla',
+            'url' => 'https://youtu.be/w8j07_DBl_I',
+        ]);
 
-    $video2 = Video::create([
-        'title' => 'Ubuntu 102',
-        'description' => 'Bla bla bla',
-        'url' => 'https://youtu.be/w8j07_DBl_I',
-    ]);
+        $video2 = Video::create([
+            'title' => 'Ubuntu 102',
+            'description' => 'Bla bla bla',
+            'url' => 'https://youtu.be/w8j07_DBl_I',
+        ]);
 
-    $video3 = Video::create([
-        'title' => 'Ubuntu 103',
-        'description' => 'Bla bla bla',
-        'url' => 'https://youtu.be/w8j07_DBl_I',
-    ]);
+        $video3 = Video::create([
+            'title' => 'Ubuntu 103',
+            'description' => 'Bla bla bla',
+            'url' => 'https://youtu.be/w8j07_DBl_I',
+        ]);
 
-    return [$video1, $video2, $video3];
-}
+        return [$video1, $video2, $video3];
+    }
+
+    if (!function_exists('create_sample_users')) {
+        function create_sample_users()
+        {
+            $user1 = User::create([
+                'name' => 'User 1',
+                'email' => 'user1@prova.com',
+                'password' => Hash::make('12345678')
+            ]);
+            $user2 = User::create([
+                'name' => 'User 2',
+                'email' => 'user2@prova.com',
+                'password' => Hash::make('12345678')
+            ]);
+            $user3 = User::create([
+                'name' => 'User 3',
+                'email' => 'user3@prova.com',
+                'password' => Hash::make('12345678')
+            ]);
+
+            return [$user1, $user2, $user3];
+        }
+    }
 }
