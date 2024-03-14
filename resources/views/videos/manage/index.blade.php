@@ -10,7 +10,7 @@
                     </svg>
                 </div>
                 <div class="ml-3">
-                    <p class="text-sm font-medium text-green-800">Successfully created</p>
+                    <p class="text-sm font-medium text-green-800">{{ session('status') }}</p>
                 </div>
                 <div class="ml-auto pl-3">
                     <div class="-mx-1.5 -my-1.5">
@@ -104,7 +104,14 @@
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                 <a href="/videos/{{ $video->id }}" target="_blank" class="text-red-600 hover:text-red-900">Show</a>
                                 <a href="#" class="text-red-600 hover:text-red-900">Edit</a>
-                                <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+
+                             <form class="inline" action="/manage/videos/{{ $video->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <a href="/videos/{{ $video->id }}" class="text-red-600 hover:text-red-900"
+                                onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
+                            </form>
+
                             </td>
                         </tr>
                         @endforeach

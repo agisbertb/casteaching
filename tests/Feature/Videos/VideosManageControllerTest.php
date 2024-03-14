@@ -23,6 +23,46 @@ class VideosManageControllerTest extends TestCase
      * @test
      */
 
+    public function user_with_permissions_can_destroy_videos(){
+        $this->loginAsRegularUser();
+
+        $video = Video::create([
+            'title' => 'Video title',
+            'description' => 'Video description',
+            'url' => 'https://www.youtube.com/watch?v=123456'
+        ]);
+
+        $response = $this->delete('/manage/videos/' . $video->id);
+
+        $response->assertStatus(403);
+    }
+
+    /**
+     * @test
+     */
+
+    public function user_without_permissions_cannot_destroy_videos(){
+        $this->loginAsVideoManager();
+
+        $video = Video::create([
+            'title' => 'Video title',
+            'description' => 'Video description',
+            'url' => 'https://www.youtube.com/watch?v=123456'
+        ]);
+
+        $response = $this->delete('/manage/videos/' . $video->id);
+
+        $response->assertRedirect(route('manage.videos'));
+        $response->assertSessionHas('status','Successfully deleted');
+
+        $this->assertNull(Video::find($video->id));
+        $this->assertNull($video->fresh());
+    }
+
+    /**
+     * @test
+     */
+
     public function user_with_permissions_can_store_videos()
     {
         $this->loginAsVideoManager();

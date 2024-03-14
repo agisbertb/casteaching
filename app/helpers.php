@@ -88,6 +88,7 @@ if (!function_exists('create_video_manager_user')) {
 
         $user->givePermissionTo('videos_manage_index');
         $user->givePermissionTo('videos_manage_create');
+        $user->givePermissionTo('videos_manage_destroy');
 
         add_personal_team($user);
         return $user;
@@ -146,6 +147,7 @@ if (!function_exists('create_permissions')) {
     {
         Permission::firstOrCreate(['name' => 'videos_manage_index']);
         Permission::firstOrCreate(['name' => 'videos_manage_create']);
+        Permission::firstOrCreate(['name' => 'videos_manage_destroy']);
     }
 }
 
