@@ -1,5 +1,12 @@
 <x-casteaching-layout>
-    <div class="px-4 sm:px-6 lg:px-8">
+
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Users') }}
+    </x-slot>
+
+    <div class="mx-auto sm:px-6 lg:px-8 w-full max-w-7xl">
+        <x-status></x-status>
 
         <div class="mt-10 flow-root">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -28,9 +35,9 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->email }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->superadmin }}</td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                <a href="/users/{{ $user->id }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Show</a>
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                                <a href="/users/{{ $user->id }}" target="_blank" class="text-red-600 hover:text-red-900">Show</a>
+                                <a href="#" class="text-red-600 hover:text-red-900">Edit</a>
+                                <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
                             </td>
                         </tr>
                         @endforeach
