@@ -52,7 +52,9 @@ class VideosManageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('videos.manage.edit', [
+            'video' => Video::findOrFail($id)]);
+
     }
 
     /**
@@ -60,7 +62,14 @@ class VideosManageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $video = Video::findOrFail($id);
+        $video->title = $request->title;
+        $video->description = $request->description;
+        $video->url = $request->url;
+        $video->save();
+
+        session()->flash('status','Successfully updated');
+        return redirect(route('manage.videos'));
     }
 
     /**

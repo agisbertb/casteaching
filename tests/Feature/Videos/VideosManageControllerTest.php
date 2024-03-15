@@ -23,6 +23,65 @@ class VideosManageControllerTest extends TestCase
      * @test
      */
 
+    public function user_with_permissions_can_update_videos(){
+
+        $this->loginAsVideoManager();
+
+        $video = Video::create([
+            'title' => 'Video title',
+            'description' => 'Video description',
+            'url' => 'https://www.youtube.com/watch?v=123456'
+        ]);
+
+        $response = $this->put('/manage/videos/' . $video->id
+            , [
+                'title' => 'New Video title',
+                'description' => 'New description',
+                'url' => 'https://www.youtube.com/watch?v=12345678'
+            ]);
+
+        $response->assertRedirect(route('manage.videos'));
+        $response->assertSessionHas('status','Successfully updated');
+
+        $newVideo = Video::find($video->id);
+        $this->assertEquals('New Video title', $newVideo->title);
+        $this->assertEquals('New description', $newVideo->description);
+        $this->assertEquals('https://www.youtube.com/watch?v=12345678', $newVideo->url);
+        $this->assertEquals($video->id, $newVideo->id);
+
+
+    }
+
+    /**
+     * @test
+     */
+    public function user_with_permissions_can_see_edit_videos()
+    {
+        $this->loginAsVideoManager();
+
+        $video = Video::create([
+            'title' => 'Video title',
+            'description' => 'Video description',
+            'url' => 'https://www.youtube.com/watch?v=123456'
+        ]);
+
+        $response = $this->get('/manage/videos/' . $video->id);
+
+        $response->assertStatus(200);
+        $response->assertViewIs('videos.manage.edit');
+        $response->assertViewHas('video');
+        $response->assertSee('<form data-qa="form_video_edit"',false);
+
+        $response->assertSeeText($video->title);
+        $response->assertSeeText($video->description);
+        $response->assertSee($video->url);
+
+    }
+
+    /**
+     * @test
+     */
+
     public function user_with_permissions_can_destroy_videos(){
         $this->loginAsRegularUser();
 

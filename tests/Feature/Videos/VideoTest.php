@@ -35,6 +35,8 @@ class VideoTest extends TestCase
         $response->assertSee('Ubuntu 101');
         $response->assertSee('Here description');
         $response->assertSee('11 de gener de 2024');
+        $response->assertSee('https://youtu.be/w8j07_DBl_I');
+
 
     }
 
