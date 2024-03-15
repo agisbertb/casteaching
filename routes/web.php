@@ -35,5 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/manage/users', [ UsersManageController::class,'index'])->middleware(['can:users_manage_index'])
     ->name('manage.users');
+    Route::post('/manage/users',[ UsersManageController::class,'store' ])->middleware(['can:users_manage_store']);
+    Route::delete('/manage/users/{id}',[ UsersManageController::class,'destroy' ])->middleware(['can:users_manage_destroy']);
 
 });
