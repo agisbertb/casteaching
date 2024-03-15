@@ -17,12 +17,12 @@
                     </x-nav-link>
                     @can('videos_manage_index')
                         <x-nav-link href="/manage/videos" :active="request()->routeIs('manage.videos')">
-                            {{ __('Manage Videos') }}
+                            {{ __('Videos') }}
                         </x-nav-link>
                     @endcan
                     @can('users_manage_index')
                         <x-nav-link href="/manage/users" :active="request()->routeIs('manage.users')">
-                            {{ __('Manage Users') }}
+                            {{ __('Users') }}
                         </x-nav-link>
                     @endcan
                 </div>
@@ -173,12 +173,12 @@
             </x-responsive-nav-link>
             @can('videos_manage_index')
             <x-responsive-nav-link href="/manage/videos" :active="request()->routeIs('manage.videos')">
-                {{ __('Manage Videos') }}
+                {{ __('Videos') }}
             </x-responsive-nav-link>
             @endcan
             @can('users_manage_index')
             <x-responsive-nav-link href="/manage/users" :active="request()->routeIs('manage.users')">
-                {{ __('Manage Users') }}
+                {{ __('Users') }}
             </x-responsive-nav-link>
             @endcan
         </div>

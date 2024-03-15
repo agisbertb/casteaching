@@ -77,25 +77,28 @@
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                         @foreach($videos as $video)
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ $video->id }}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $video->title }}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $video->description }}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $video->url }}</td>
-                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                <a href="/videos/{{ $video->id }}" target="_blank" class="text-red-600 hover:text-red-900">Show</a>
-                                <a href="#" class="text-red-600 hover:text-red-900">Edit</a>
+                            @if($loop->even)
+                                <tr class="bg-gray">
+                            @else
+                                <tr class="bg-white">
+                                    @endif
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ $video->id }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $video->title }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $video->description }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $video->url }}</td>
+                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <a href="/videos/{{ $video->id }}" target="_blank" class="text-red-600 hover:text-red-900">Show</a>
+                                        <a href="#" class="text-red-600 hover:text-red-900">Edit</a>
 
-                             <form class="inline" action="/manage/videos/{{ $video->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a href="/videos/{{ $video->id }}" class="text-red-600 hover:text-red-900"
-                                onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
-                            </form>
-
-                            </td>
-                        </tr>
-                        @endforeach
+                                        <form class="inline" action="/manage/videos/{{ $video->id }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#" class="text-red-600 hover:text-red-900"
+                                               onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
