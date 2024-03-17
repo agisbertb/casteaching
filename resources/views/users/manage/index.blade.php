@@ -86,7 +86,14 @@
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                 <a href="/users/{{ $user->id }}" target="_blank" class="text-red-600 hover:text-red-900">Show</a>
                                 <a href="#" class="text-red-600 hover:text-red-900">Edit</a>
-                                <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+                                <form class="inline" action="/manage/users/{{$user->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <a href="/users/{{$user->id}}" class="text-red-600 hover:text-red-900"
+                                       onclick="event.preventDefault();
+                                        this.closest('form').submit();">Delete</a>
+                                </form> 
                             </td>
                         </tr>
                         @endforeach
