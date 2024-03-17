@@ -17,7 +17,6 @@ class UsersManageControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     /** @test  */
     public function user_with_permissions_can_destroy_users() {
         $this->loginAsUserManager();
