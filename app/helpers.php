@@ -167,6 +167,17 @@ if (!function_exists('create_permissions')) {
     }
 }
 
+if (!function_exists('create_sample_video')) {
+    function create_sample_video()
+    {
+        return Video::create([
+            'title' => 'Ubuntu 100',
+            'description' => 'Bla bla bla',
+            'url' => 'https://youtu.be/w8j07_DBl_I',
+        ]);
+}
+    }
+
 if (!function_exists('create_sample_videos')) {
     function create_sample_videos()
     {
