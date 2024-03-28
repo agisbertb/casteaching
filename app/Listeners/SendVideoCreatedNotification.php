@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Notification;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Events\VideoCreated;
-
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Notification;
 
 class SendVideoCreatedNotification
 {
@@ -17,8 +16,8 @@ class SendVideoCreatedNotification
     /**
      * Handle the event.
      */
-    public function handle(VideoCreated $event): void
+    public function handle(object $event): void
     {
-        Notification::route('mail', config('casteaching.admins'))->notify(new VideoCreated($event->video));
+        Notification::route('mail', config('casteaching.admins'))->notify(new \App\Notifications\VideoCreated($event->video));
     }
 }
