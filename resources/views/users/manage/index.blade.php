@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="mt-6 flex items-center justify-end gap-x-6">
-                        <button type="submit" class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Crear</button>
+                        <x-button type="submit" class="rounded-md px-3 py-2 text-sm font-semibold">Crear</x-button>
                     </div>
                 </form>
             </div>
@@ -84,15 +84,17 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->email }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->superadmin }}</td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                <a href="/users/{{ $user->id }}" target="_blank" class="text-red-600 hover:text-red-900">Show</a>
-                                <a href="/manage/users/{{ $user->id }}" class="text-red-600 hover:text-red-900">Edit</a>
+                                <a href="/users/{{ $user->id }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">Show</a>
+                                <a href="/manage/users/{{ $user->id }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Edit</a>
+                                @if ($user->id != auth()->user()->id && $user->superadmin == 0)
                                 <form class="inline" action="/manage/users/{{$user->id}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="/users/{{$user->id}}" class="text-red-600 hover:text-red-900"
+                                    <a href="/users/{{$user->id}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                        onclick="event.preventDefault();
                                         this.closest('form').submit();">Delete</a>
-                                </form> 
+                                </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

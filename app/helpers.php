@@ -36,7 +36,7 @@ if (!function_exists('create_default_videos')) {
             'published_at' => Carbon::parse('January 11, 2024 15:00'),
             'previous' => null,
             'next' => null,
-            'series_id' => 1
+            'serie_id' => 1
         ]);
     }
 }

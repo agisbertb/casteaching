@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->unsignedInteger('serie_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('serie_id');
+            $table->dropColumn('user_id');
         });
     }
 };

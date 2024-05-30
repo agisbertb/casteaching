@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Videos;
 
+use App\Models\Serie;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Database\Eloquent\Collection;
@@ -147,6 +148,49 @@ class VideosManageControllerTest extends TestCase
         $this->assertEquals($videoDB->title,$video->title);
         $this->assertEquals($videoDB->description, $video->description);
         $this->assertEquals($videoDB->url, $video->url);
+        $this->assertNull($video->published_at);
+    }
+
+    /**
+     * @test
+     */
+
+    public function user_with_permissions_can_store_videos_with_serie()
+    {
+        $this->loginAsVideoManager();
+
+        $serie = Serie::create([
+            'title' => 'TDD (Test Driven Development)',
+            'description' => 'Bla bla bla',
+            'image' => 'tdd.png',
+            'teacher_name' => 'Sergi Tur Badenas',
+            'teacher_photo_url' => 'https://www.gravatar.com/avatar/' . md5('sergiturbadenas@gmail.com'),
+        ]);
+
+        $video = objectify([
+            'title' => 'Video title',
+            'description' => 'Video description',
+            'url' => 'https://www.youtube.com/watch?v=123456',
+            'serie_id' => $serie->id
+        ]);
+
+        $response = $this->post('/manage/videos', [
+            'title' => 'Video title',
+            'description' => 'Video description',
+            'url' => 'https://www.youtube.com/watch?v=123456',
+            'serie_id' => $serie->id
+        ]);
+
+        $response->assertRedirect(route('manage.videos'));
+        $response->assertSessionHas('status','Successfully created');
+
+        $videoDB = Video::first();
+
+        $this->assertNotNull($videoDB);
+        $this->assertEquals($videoDB->title,$video->title);
+        $this->assertEquals($videoDB->description, $video->description);
+        $this->assertEquals($videoDB->url, $video->url);
+        $this->assertEquals($videoDB->serie_id, $video->serie_id);
         $this->assertNull($video->published_at);
     }
 
