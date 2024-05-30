@@ -46,5 +46,12 @@
                 </x-button>
             </div>
         </form>
+
+        <div class="mt-4 flex justify-center space-x-4">
+            <a href="{{ route('google.redirect') }}" class="button">
+                <x-google-button />
+            </a>
+        </div>
+
     </x-authentication-card>
 </x-guest-layout>

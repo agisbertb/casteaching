@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VideosManageController;
 use App\Http\Controllers\UsersManageController;
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Login with Google Account routes
+
+Route::get('/google/redirect', [SocialiteController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('google.callback');
+
 
 Route::get('/', [LandingPageController::class, 'show']);
 
