@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <x-button type="submit" class="rounded-md px-3 py-2 text-sm font-semibold">Editar</x-danger-button>
+                    <x-button type="submit" class="rounded-md px-3 py-2 text-sm font-semibold">Editar</x-button>
                 </div>
             </form>
         </div>

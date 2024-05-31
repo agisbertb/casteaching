@@ -44,8 +44,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/manage/users', [ UsersManageController::class,'index'])->middleware(['can:users_manage_index'])
     ->name('manage.users');
     Route::post('/manage/users',[ UsersManageController::class,'store' ])->middleware(['can:users_manage_store']);
-    Route::get('/manage/users/{id}', [UsersManageController::class,'edit'])->middleware(['can:users_manage_edit']);
-    Route::put('/manage/users/{id}', [UsersManageController::class,'update'])->middleware(['can:users_manage_update']);
+    Route::get('/manage/users/{id}/edit', [UsersManageController::class,'edit'])->middleware(['can:users_manage_edit'])->name('manage.users.edit');
+    Route::put('/manage/users/{id}/edit', [UsersManageController::class,'update'])->middleware(['can:users_manage_update']);
     Route::delete('/manage/users/{id}',[ UsersManageController::class,'destroy' ])->middleware(['can:users_manage_destroy']);
     Route::get('/manage/users/{id}', [UsersManageController::class, 'show'])->middleware(['can:users_manage_show'])->name('manage.users.show');
 
