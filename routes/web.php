@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SeriesManageController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\VideosController;
@@ -26,6 +27,9 @@ Route::get('/google/callback', [SocialiteController::class, 'handleGoogleCallbac
 
 
 Route::get('/', [LandingPageController::class, 'show']);
+
+Route::get('/series/{id}', [SeriesController::class, 'show'])->name('series.show');
+Route::get('/series/{seriesId}/videos/{videoId}', [SeriesController::class, 'showVideo'])->name('series.show.video');
 
 Route::get('/videos/{id}', [VideosController::class,'show']);
 
