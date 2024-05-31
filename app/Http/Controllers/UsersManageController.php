@@ -39,7 +39,8 @@ class UsersManageController extends Controller
 
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.manage.show', compact('user'));
     }
 
     public function edit($id)

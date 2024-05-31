@@ -47,6 +47,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/manage/users/{id}', [UsersManageController::class,'edit'])->middleware(['can:users_manage_edit']);
     Route::put('/manage/users/{id}', [UsersManageController::class,'update'])->middleware(['can:users_manage_update']);
     Route::delete('/manage/users/{id}',[ UsersManageController::class,'destroy' ])->middleware(['can:users_manage_destroy']);
+    Route::get('/manage/users/{id}', [UsersManageController::class, 'show'])->middleware(['can:users_manage_show'])->name('manage.users.show');
 
     Route::get('/manage/series', [ SeriesManageController::class,'index'])->middleware(['can:series_manage_index'])
         ->name('manage.series');
