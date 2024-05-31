@@ -10,17 +10,17 @@
         <x-status></x-status>
 
         @can('series_manage_create')
-            <div class="p-4 mt-10">
-                <form method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="space-y-12">
-                        <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
-                            <div>
-                                <h2 class="text-base font-semibold leading-7 text-gray-900">Series</h2>
-                                <p class="mt-1 text-sm leading-6 text-gray-600">Informació bàsica de les series</p>
-                            </div>
+            <div class="space-y-10 divide-y divide-gray-900/10 mt-10">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+                    <div class="px-4 sm:px-0">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Series</h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Informació bàsica de les series</p>
+                    </div>
 
-                            <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
+                    <form method="POST" enctype="multipart/form-data" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                        @csrf
+                        <div class="px-4 py-6 sm:p-8">
+                            <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                                 <div class="col-span-full">
                                     <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Títol</label>
@@ -65,12 +65,11 @@
 
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mt-6 mb-6 flex items-center justify-end gap-x-6">
-                        <x-button type="submit" class="rounded-md px-3 py-2 text-sm font-semibold">Crear</x-button>
-                    </div>
-                </form>
+                        <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+                            <x-button type="submit" class="rounded-md px-3 py-2 text-sm font-semibold">Crear</x-button>
+                        </div>
+                    </form>
+                </div>
             </div>
         @endcan
 
