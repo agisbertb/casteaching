@@ -108,7 +108,7 @@
                                         <td class="whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6 text-center">
                                             <div class="flex justify-end items-center space-x-3">
                                                 <a href="/series/{{ $serie->id }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">Mostrar</a>
-                                                <a href="/manage/series/{{ $serie->id }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">Editar</a>
+                                                <a href="/manage/series/{{ $serie->id }}/edit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">Editar</a>
                                                 <form class="inline" action="/manage/series/{{ $serie->id }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
