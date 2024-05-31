@@ -25,6 +25,11 @@
                             {{ __('Users') }}
                         </x-nav-link>
                     @endcan
+                    @can('series_manage_index')
+                        <x-nav-link href="/manage/series" :active="request()->routeIs('manage.series')">
+                            {{ __('Series') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -180,6 +185,11 @@
             <x-responsive-nav-link href="/manage/users" :active="request()->routeIs('manage.users')">
                 {{ __('Users') }}
             </x-responsive-nav-link>
+            @endcan
+            @can('series_manage_index')
+                <x-responsive-nav-link href="/manage/series" :active="request()->routeIs('manage.series')">
+                    {{ __('Series') }}
+                </x-responsive-nav-link>
             @endcan
         </div>
 
